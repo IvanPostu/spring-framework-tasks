@@ -4,6 +4,7 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <bean id="questionEntityMapper" class="com.ivan.spring_context.mappers.QuestionEntityCSVMapper">
+        <property name="fieldTerminator" value="," />
     </bean>
     
     <bean id="quizService" class="com.ivan.spring_context.service.QuizServiceImpl">

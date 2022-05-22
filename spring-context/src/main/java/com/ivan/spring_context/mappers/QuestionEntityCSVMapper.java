@@ -2,6 +2,7 @@ package com.ivan.spring_context.mappers;
 
 import com.ivan.spring_context.domain.QuestionEntity;
 import com.ivan.spring_context.exceptions.GeneralMapperException;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +14,9 @@ import java.util.Map;
  * @author ivan
  */
 public class QuestionEntityCSVMapper implements QuestionEntityMapper {
+
+    @Setter
+    private char fieldTerminator;
 
     @Override
     public List<QuestionEntity> mapToQuestionEntities(String data) throws GeneralMapperException {
@@ -28,7 +32,7 @@ public class QuestionEntityCSVMapper implements QuestionEntityMapper {
             }
 
             for (int i = 1; i < lines.length; i++) {
-                String[] items = lines[i].split(",");
+                String[] items = lines[i].split(String.valueOf(fieldTerminator));
 
                 for (String item : items) {
                     item = removeStartAndEndSemiColonIfExists(item);

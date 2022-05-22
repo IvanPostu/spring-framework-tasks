@@ -15,6 +15,8 @@ public class QuestionEntityCSVMapperTest {
     public void testMapToQuestionEntitiesSuccessCase() throws GeneralMapperException {
         String csvData = ResourceReader.readFromResources("/testQuestions.valid.csv");
         QuestionEntityCSVMapper csvMapper = new QuestionEntityCSVMapper();
+        csvMapper.setFieldTerminator(',');
+
         List<QuestionEntity> mappedData = csvMapper.mapToQuestionEntities(csvData);
 
         int mappedDataItemsCount = mappedData.size();
