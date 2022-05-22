@@ -7,12 +7,10 @@ import com.ivan.spring_context.ResourceReader;
 import com.ivan.spring_context.domain.QuestionEntity;
 import com.ivan.spring_context.exceptions.GeneralMapperException;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class QuestionEntityCSVMapperTest {
 
-    @DisplayName("Test QuestionEntityCSVMapper.MapToQuestionEntities (success validation case)")
     @Test
     public void testMapToQuestionEntitiesSuccessCase() throws GeneralMapperException {
         String csvData = ResourceReader.readFromResources("/testQuestions.valid.csv");
@@ -39,7 +37,6 @@ public class QuestionEntityCSVMapperTest {
         });
     }
 
-    @DisplayName("Test QuestionEntityCSVMapper.MapToQuestionEntities (invalid validation case)")
     @Test
     public void testMapToQuestionEntitiesErrorCase() throws GeneralMapperException {
         String csvData = ResourceReader.readFromResources("/testQuestions.invalid.csv");
