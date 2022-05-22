@@ -1,6 +1,8 @@
 package com.ivan.spring_context.mappers;
 
 import com.ivan.spring_context.domain.QuestionEntity;
+import com.ivan.spring_context.exceptions.GeneralMapperException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +15,7 @@ import java.util.Map;
 public class QuestionEntityCSVMapper implements QuestionEntityMapper {
 
     @Override
-    public List<QuestionEntity> mapToQuestionEntities(String data) {
+    public List<QuestionEntity> mapToQuestionEntities(String data) throws GeneralMapperException {
         List<QuestionEntity> result = null;
 
         try {
@@ -21,7 +23,8 @@ public class QuestionEntityCSVMapper implements QuestionEntityMapper {
             result = new ArrayList<>(lines.length);
 
             if (lines.length <= 1) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException(
+                        "CSV file must have first line with column definitions and at least one row with records!");
             }
 
             for (int i = 1; i < lines.length; i++) {
@@ -32,26 +35,28 @@ public class QuestionEntityCSVMapper implements QuestionEntityMapper {
                 }
 
                 Map<String, Integer> answersWithWeights = new HashMap<>();
-                
+
                 String[] weights = removeStartAndEndSemiColonIfExists(items[3]).split(";");
                 String[] answers = removeStartAndEndSemiColonIfExists(items[2]).split(";");
 
                 if (answers.length != weights.length) {
                     throw new GeneralMapperException(
-                            "Answers count isn't equal to weights count"
-                    );
+                            "Answers count isn't equal to weights count");
                 }
 
                 for (int j = 0; j < answers.length; j++) {
                     answersWithWeights.put(answers[j], Integer.parseInt(weights[j]));
                 }
 
-                QuestionEntity e = new QuestionEntity(Integer.parseInt(items[0]), items[1], answersWithWeights);
+                QuestionEntity e = new QuestionEntity(
+                        Integer.parseInt(items[0]),
+                        removeStartAndEndSemiColonIfExists(items[1]),
+                        answersWithWeights);
                 result.add(e);
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new GeneralMapperException(e);
         }
 
         return result;

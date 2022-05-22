@@ -1,0 +1,2 @@
+"question_id","question","answers_separated_with_semi_colon","answer_weights_separated_with_semi_colon"
+1,"How old are you?"," < 18; > 18 && < 24; > 24","2;4;9;7"

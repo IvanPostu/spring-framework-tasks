@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.ivan.spring_context.domain.QuestionEntity;
+import com.ivan.spring_context.domain.QuizResult;
 
 /**
  *
@@ -12,5 +13,7 @@ import com.ivan.spring_context.domain.QuestionEntity;
 public interface QuizService {
 
     public Optional<List<QuestionEntity>> getQuiz(String data);
+
+    public QuizResult performQuiz(List<QuestionEntity> questionEntities);
 
 }
