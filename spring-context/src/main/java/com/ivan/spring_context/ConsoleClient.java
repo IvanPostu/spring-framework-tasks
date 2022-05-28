@@ -14,7 +14,9 @@ import com.ivan.spring_context.service.QuizService;
  */
 public class ConsoleClient {
     
-    public static void run(QuizService quizService, String csvData){
+    public static void run(QuizService quizService, String csvData, boolean ignoreExecution){
+        if(ignoreExecution) return;
+
         Optional<List<QuestionEntity>> questionEntities = quizService.getQuiz(csvData);
         QuizResult quizResult = quizService.performQuiz(questionEntities.orElseThrow());
         quizResult.printFormattedResult();

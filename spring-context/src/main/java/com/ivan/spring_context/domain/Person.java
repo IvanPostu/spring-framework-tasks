@@ -1,6 +1,11 @@
 
 package com.ivan.spring_context.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
 public class Person {
     private String name;
     private int age;

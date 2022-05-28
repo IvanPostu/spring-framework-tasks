@@ -5,17 +5,8 @@
         http://www.springframework.org/schema/aop 
         http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
-        <import resource="_context_child.xml" />
 
-        <!-- It's also valid  -->
-         <!-- <import resource="classpath*:_context_child.xml" /> -->
-
-    <bean id="questionEntityMapper" class="com.ivan.spring_context.mappers.QuestionEntityCSVMapper">
-        <property name="fieldTerminator" value="," />
-    </bean>
-
-    <bean id="quizService" class="com.ivan.spring_context.service.QuizServiceImpl">
-        <constructor-arg name="questionEntityMapper" ref="questionEntityMapper" />
+    <bean id="questionEntityDummyMapper" class="com.ivan.spring_context.mappers.QuestionEntityDummyMapper">
     </bean>
 
 </beans>
