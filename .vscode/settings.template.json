@@ -1,0 +1,26 @@
+{
+    "java.completion.importOrder": [
+        "java",
+        "javax"
+    ],
+    "files.exclude": {
+        "**/mysql_data/*/**": true
+    },
+    "files.watcherExclude": {
+        "**/mysql_data/*/**": true
+    },
+    "zenMode.centerLayout": false,
+    "zenMode.hideLineNumbers": false,
+    "editor.minimap.scale": 1,
+    "editor.fontSize": 17,
+    "editor.fontFamily": "'Fira Code Retina', Consolas, monospace, 'Courier New'",
+    "editor.letterSpacing": 0.1,
+    "editor.lineHeight": 20,
+    "workbench.colorCustomizations": {
+        "editorError.border": "#b80000",
+        "statusBar.background": "#333333",
+        "statusBar.noFolderBackground": "#333333",
+        "statusBar.debuggingBackground": "#333333"
+    },
+    "java.configuration.updateBuildConfiguration": "disabled"
+}

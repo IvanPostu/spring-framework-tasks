@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:mvc="http://www.springframework.org/schema/mvc" xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+
+    <aop:config>
+        <aop:aspect id="log" ref="logging">
+            <aop:pointcut id="selectAll" expression="execution(* com.ivan.spring_context.aop_example.xml.Student.*() )" />
+
+            <aop:before pointcut-ref="selectAll" method="beforeAdvice" />
+            <aop:after pointcut-ref="selectAll" method="afterAdvice" />
+            <aop:after-returning pointcut-ref="selectAll" returning="retVal" method="afterReturningAdvice" />
+
+            <aop:after-throwing pointcut-ref="selectAll" throwing="ex" method="AfterThrowingAdvice" />
+        </aop:aspect>
+    </aop:config>
+
+    <bean id="student" class="com.ivan.spring_context.aop_example.xml.Student">
+        <property name="name" value="Ivan" />
+        <property name="age" value="19" />
+        <property name="executor" ref="executor"></property>
+    </bean>
+
+    <bean id="logging" class="com.ivan.spring_context.aop_example.xml.Logging"></bean>
+
+    <bean id="executor" class="com.ivan.spring_context.aop_example.xml.ExecutorSimple"></bean>    
+
+</beans>
