@@ -64,6 +64,7 @@ public class App {
 
             Object o5 = annotationBasedContextWithComponentScan.getBean("bean_A");
             Object o6 = annotationBasedContextWithComponentScan.getBean(BeanB.class);
+            Object o7 = annotationBasedContextWithComponentScan.getBean("personDao");
             
             QuizService quizService = contextSimple.getBean(QuizService.class);
             String csvData = ResourceReader.readFromResources("/questions.csv");
