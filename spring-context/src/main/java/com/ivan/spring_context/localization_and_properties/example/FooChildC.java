@@ -1,4 +1,4 @@
-package com.ivan.spring_context.annotation_based_config.example;
+package com.ivan.spring_context.localization_and_properties.example;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

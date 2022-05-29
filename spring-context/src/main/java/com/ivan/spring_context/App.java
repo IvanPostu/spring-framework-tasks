@@ -1,12 +1,12 @@
 package com.ivan.spring_context;
 
-import com.ivan.spring_context.annotation_based_config.ParentConfig;
-import com.ivan.spring_context.annotation_based_config.example.Foo1;
 import com.ivan.spring_context.aop_example.IStudent;
 import com.ivan.spring_context.aop_example.xml.Student;
 import com.ivan.spring_context.java_based_beans.BeanB;
 import com.ivan.spring_context.java_based_beans.ComponentScanConfigs;
 import com.ivan.spring_context.java_based_beans.DemoConfig;
+import com.ivan.spring_context.localization_and_properties.Foo1;
+import com.ivan.spring_context.localization_and_properties.ParentConfig;
 import com.ivan.spring_context.service.QuizService;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
