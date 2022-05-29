@@ -8,7 +8,7 @@ import org.springframework.context.annotation.PropertySources;
 @Configuration
 @ComponentScan(basePackageClasses = {ParentConfig.class})
 @PropertySources({
-    @PropertySource("classpath:foo.properties"),
+    @PropertySource(value = "classpath:foo.properties", ignoreResourceNotFound = true),
 })
 public class ParentConfig {
     
