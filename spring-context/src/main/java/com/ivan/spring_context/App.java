@@ -1,5 +1,7 @@
 package com.ivan.spring_context;
 
+import com.ivan.spring_context.annotation_based_config.ParentConfig;
+import com.ivan.spring_context.annotation_based_config.example.Foo1;
 import com.ivan.spring_context.aop_example.IStudent;
 import com.ivan.spring_context.aop_example.xml.Student;
 import com.ivan.spring_context.java_based_beans.BeanB;
@@ -16,26 +18,27 @@ public class App {
     private final static String CONTEXT_AOP_ANNOTATIONBASED_URL = "/aop-annotation-context.xml";
     private final static String CONTEXT_URL = "/context.xml";
 
-    public static void main(String[] args) {
-        
-        
+    private static void foo(Object... objs) {
 
-        try (
-                //Xml based context
+    }
+
+    public static void main(String[] args) {
         AbstractApplicationContext contextSimple = new ClassPathXmlApplicationContext(CONTEXT_URL);
         ConfigurableApplicationContext contextAopBasedOnXml = new ClassPathXmlApplicationContext(
                 CONTEXT_AOP_URL);
         ClassPathXmlApplicationContext contextAopBasedAnnotations = new ClassPathXmlApplicationContext(
                 CONTEXT_AOP_ANNOTATIONBASED_URL);
-                AnnotationConfigApplicationContext annotationBasedContext = new AnnotationConfigApplicationContext();     
-                AnnotationConfigApplicationContext annotationBasedContextWithComponentScan = new AnnotationConfigApplicationContext();     
-                ) 
-        {
-                annotationBasedContext.register(DemoConfig.class);
-                annotationBasedContext.refresh();
+        AnnotationConfigApplicationContext annotationBasedContext = new AnnotationConfigApplicationContext();
+        AnnotationConfigApplicationContext annotationBasedContextWithComponentScan = new AnnotationConfigApplicationContext();
+        AbstractApplicationContext annotationBasedContextWithProperties = new AnnotationConfigApplicationContext(ParentConfig.class);
 
-                annotationBasedContextWithComponentScan.register(ComponentScanConfigs.class);
-                annotationBasedContextWithComponentScan.refresh();
+        try {
+            annotationBasedContext.register(DemoConfig.class);
+            annotationBasedContext.refresh();
+
+            annotationBasedContextWithComponentScan.register(ComponentScanConfigs.class);
+            annotationBasedContextWithComponentScan.refresh();
+
 
             // dynamic proxy implementation
             IStudent studentProxy = contextAopBasedAnnotations
@@ -53,7 +56,6 @@ public class App {
             studentCGLibImpl.getName();
 
             Object o = contextSimple.getBean("questionEntityDummyMapper");
-            System.out.println(o);
 
             // ==================
 
@@ -65,13 +67,23 @@ public class App {
             Object o5 = annotationBasedContextWithComponentScan.getBean("bean_A");
             Object o6 = annotationBasedContextWithComponentScan.getBean(BeanB.class);
             Object o7 = annotationBasedContextWithComponentScan.getBean("personDao");
-            
+
+            Foo1 o8 = annotationBasedContextWithProperties.getBean("foo1", Foo1.class);
+
+            foo(o, o1, o2, o3, o4, o5, o6, o7, o8);
+
             QuizService quizService = contextSimple.getBean(QuizService.class);
             String csvData = ResourceReader.readFromResources("/questions.csv");
             ConsoleClient.run(quizService, csvData, true);
-        }catch(Exception e ){
-                e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            contextSimple.close();
+            contextAopBasedOnXml.close();
+            contextAopBasedAnnotations.close();
+            annotationBasedContext.close();
+            annotationBasedContextWithComponentScan.close();
+            annotationBasedContextWithProperties.close();
         }
-
     }
 }

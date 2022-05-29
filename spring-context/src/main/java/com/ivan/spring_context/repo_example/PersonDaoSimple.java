@@ -6,10 +6,8 @@ import com.ivan.spring_context.domain.Person;
 import com.ivan.spring_context.java_based_beans.BeanA;
 import com.ivan.spring_context.java_based_beans.BeanB;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Repository;
 
-@SuppressWarnings({"deprecation"})
 @Repository(value = "personDao")
 public class PersonDaoSimple implements PersonDao {
 
@@ -31,4 +29,8 @@ public class PersonDaoSimple implements PersonDao {
         return Optional.of(new Person("Jim", 22));
     }
     
+    public void display() {
+        System.out.println(beanA);
+        System.out.println(beanB);
+    }
 }
