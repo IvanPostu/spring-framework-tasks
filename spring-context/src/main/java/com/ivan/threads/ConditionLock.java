@@ -1,8 +1,10 @@
 package com.ivan.threads;
 
+import java.util.Arrays;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.stream.Stream;
 
 public class ConditionLock {
     static Lock lock = new ReentrantLock();
@@ -18,7 +20,8 @@ public class ConditionLock {
                 try {
 
                     lock.lock();
-                    
+                    Stream<Integer> s = Arrays.stream(new int[] {1, 2, 3}).boxed();
+                    s.sorted();
                     condition.await();
 
                     System.out.println(String.format("Report debit=%d, credit=%d", debit, credit));
